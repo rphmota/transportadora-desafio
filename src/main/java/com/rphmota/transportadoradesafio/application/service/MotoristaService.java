@@ -1,6 +1,9 @@
 package com.rphmota.transportadoradesafio.application.service;
 
+import com.rphmota.transportadoradesafio.domain.dto.CriarMotoristaDTO;
+import com.rphmota.transportadoradesafio.domain.entity.Caminhao;
 import com.rphmota.transportadoradesafio.domain.entity.Motorista;
+import com.rphmota.transportadoradesafio.domain.repository.CaminhaoRepository;
 import com.rphmota.transportadoradesafio.domain.repository.EntregaRepository;
 import com.rphmota.transportadoradesafio.domain.repository.MotoristaRepository;
 import com.rphmota.transportadoradesafio.exception.ResourceNotFoundException;
@@ -15,11 +18,13 @@ public class MotoristaService {
 
     private final MotoristaRepository motoristaRepository;
     private final EntregaRepository entregaRepository;
+    private final CaminhaoRepository caminhaoRepository;
 
     @Autowired
-    public MotoristaService(MotoristaRepository motoristaRepository, EntregaRepository entregaRepository) {
+    public MotoristaService(MotoristaRepository motoristaRepository, EntregaRepository entregaRepository, CaminhaoRepository caminhaoRepository) {
         this.motoristaRepository = motoristaRepository;
         this.entregaRepository = entregaRepository;
+        this.caminhaoRepository = caminhaoRepository;
     }
 
     public Motorista getMotoristaById(Long id) {
@@ -27,11 +32,16 @@ public class MotoristaService {
                 .orElseThrow(() -> new ResourceNotFoundException("Motorista não encontrado"));
     }
 
-    public Motorista createMotorista(Motorista motorista) {
-        // Verifica se o caminhão associado já está vinculado a outro motorista
-        if (motorista.getCaminhao() != null && motoristaRepository.existsByCaminhaoId(motorista.getCaminhao().getId())) {
-            throw new IllegalStateException("Caminhão já está atribuído a outro motorista");
+    public Motorista createMotorista(CriarMotoristaDTO motoristaDTO) {
+        Motorista motorista = new Motorista();
+        motorista.setNome(motoristaDTO.getNome());
+
+        if (motoristaDTO.getCaminhaoId() != null) {
+            Caminhao caminhao = caminhaoRepository.findById(motoristaDTO.getCaminhaoId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Caminhão não encontrado com ID: " + motoristaDTO.getCaminhaoId()));
+            motorista.setCaminhao(caminhao);
         }
+
         return motoristaRepository.save(motorista);
     }
 

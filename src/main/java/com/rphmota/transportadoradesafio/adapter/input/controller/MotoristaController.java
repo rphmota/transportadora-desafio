@@ -1,11 +1,15 @@
 package com.rphmota.transportadoradesafio.adapter.input.controller;
 
 import com.rphmota.transportadoradesafio.application.service.MotoristaService;
+import com.rphmota.transportadoradesafio.domain.dto.CriarMotoristaDTO;
 import com.rphmota.transportadoradesafio.domain.entity.Motorista;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,9 +36,14 @@ public class MotoristaController {
     }
 
     @PostMapping
-    public ResponseEntity<Motorista> createMotorista(@RequestBody Motorista motorista) {
-        Motorista savedMotorista = motoristaService.createMotorista(motorista);
-        return ResponseEntity.ok(savedMotorista);
+    public ResponseEntity<Void> createMotorista(@Valid @RequestBody CriarMotoristaDTO motoristaDTO) {
+        System.out.println("poddd");
+        Motorista savedMotorista = motoristaService.createMotorista(motoristaDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedMotorista.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/{id}")

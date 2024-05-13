@@ -1,6 +1,9 @@
 package com.rphmota.transportadoradesafio.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 @Entity
@@ -11,6 +14,8 @@ public class Motorista {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome é obrigatório")
+    @Size(min = 3, max = 255, message = "O nome deve ter entre 3 e 255 caracteres")
     @Column(nullable = false)
     private String nome;
 
