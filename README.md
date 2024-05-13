@@ -88,6 +88,7 @@ tenha o docker instalado
 
 ```
 Rode o comando para iniciar a aplicação 
-docker compose --build 
+
+docker-compose up --build
 
 ```
