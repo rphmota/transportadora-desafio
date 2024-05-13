@@ -82,3 +82,12 @@ classDiagram
     Motorista "1" -- "0..2" Entrega
     Entrega "1" -- "1" Carga
 ```
+
+## Iniciando a aplicação
+tenha o docker instalado
+
+```
+Rode o comando para iniciar a aplicação 
+docker compose --build 
+
+```
