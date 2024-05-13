@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CaminhaoRepository extends JpaRepository<Caminhao, Long> {
-    // Este método está correto se a entidade Caminhao tem uma referência correta a Cliente
+
     List<Caminhao> findByClienteId(Long clienteId);
 }
 

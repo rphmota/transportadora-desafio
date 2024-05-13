@@ -3,9 +3,9 @@ package com.rphmota.transportadoradesafio.domain.dto;
 public class CriarMotoristaDTO {
 
     private String nome;
-    private Long caminhaoId; // Somente ID, pois a relação pode ser estabelecida por um serviço
+    private Long caminhaoId;
 
-    // Construtores
+
     public CriarMotoristaDTO() {}
 
     public CriarMotoristaDTO(String nome, Long caminhaoId) {

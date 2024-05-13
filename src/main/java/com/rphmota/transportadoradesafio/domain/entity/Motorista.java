@@ -26,7 +26,7 @@ public class Motorista {
     @OneToMany(mappedBy = "motorista", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Entrega> entregas;
 
-    // Getters e setters
+
 
     public Long getId() {
         return id;

@@ -73,6 +73,5 @@ public class Caminhao {
     public void setEntregas(List<Entrega> entregas) {
         this.entregas = entregas;
     }
-// Getters e setters
 }
 

@@ -3,9 +3,9 @@ package com.rphmota.transportadoradesafio.domain.dto;
 public class AtualizarMotoristaDTO {
     private Long id;
     private String nome;
-    private Long caminhaoId; // Pode ser null para desassociar o caminhão atual
+    private Long caminhaoId;
 
-    // Construtores, getters e setters
+
     public Long getId() {
         return id;
     }

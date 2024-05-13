@@ -43,7 +43,8 @@ public class EntregaController {
 
             System.out.println("Erro ao criar entrega: " + e.getMessage());
 
-            // Retornando menssagem mais especifica para o cliuente
+            // Retornando menssagem mais especifica para o cliuente utilizando estrutura de hashmap para ficar
+            // em forma de melhor leitura
             Map<String, String> errorDetails = new HashMap<>();
             errorDetails.put("error", "Falha ao criar entrega");
             errorDetails.put("message", e.getMessage());

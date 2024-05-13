@@ -1,98 +1,38 @@
 package com.rphmota.transportadoradesafio.domain.dto;
 
+import com.rphmota.transportadoradesafio.domain.entity.Entrega;
+import lombok.Data;
+
 import java.time.LocalDate;
 
+@Data
 public class EntregaDTO {
 
     private Long id;
     private String destino;
     private double valorBase;
+    private double valorTotal;
     private LocalDate dataEntrega;
     private Boolean valiosa;
     private Boolean segurada;
     private Boolean perigosa;
     private Long caminhaoId;
     private Long motoristaId;
-    private CargaDTO carga; // Supondo que CargaDTO é um DTO simplificado para a entidade Carga
+    private CargaDTO carga;
 
-    // Construtores, getters e setters
-    public Long getId() {
-        return id;
+
+    public EntregaDTO(Entrega entrega) {
+        this.id = entrega.getId();
+        this.destino = entrega.getDestino();
+        this.valorTotal = entrega.calcularValorTotal();
+        this.valorBase = entrega.getValorBase();
+        this.dataEntrega = entrega.getDataEntrega();
+        this.valiosa = entrega.isValiosa();
+        this.segurada = entrega.isSegurada();
+        this.perigosa = entrega.isPerigosa();
+        this.caminhaoId = entrega.getCaminhao() != null ? entrega.getCaminhao().getId() : null;
+        this.motoristaId = entrega.getMotorista() != null ? entrega.getMotorista().getId() : null;
+        this.carga = entrega.getCarga() != null ? new CargaDTO(entrega.getCarga()) : null;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDestino() {
-        return destino;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
-    public double getValorBase() {
-        return valorBase;
-    }
-
-    public void setValorBase(double valorBase) {
-        this.valorBase = valorBase;
-    }
-
-    public LocalDate getDataEntrega() {
-        return dataEntrega;
-    }
-
-    public void setDataEntrega(LocalDate dataEntrega) {
-        this.dataEntrega = dataEntrega;
-    }
-
-    public Boolean isValiosa() {
-        return valiosa;
-    }
-
-    public void setValiosa(Boolean valiosa) {
-        this.valiosa = valiosa;
-    }
-
-    public Boolean isSegurada() {
-        return segurada;
-    }
-
-    public void setSegurada(Boolean segurada) {
-        this.segurada = segurada;
-    }
-
-    public Boolean isPerigosa() {
-        return perigosa;
-    }
-
-    public void setPerigosa(Boolean perigosa) {
-        this.perigosa = perigosa;
-    }
-
-    public Long getCaminhaoId() {
-        return caminhaoId;
-    }
-
-    public void setCaminhaoId(Long caminhaoId) {
-        this.caminhaoId = caminhaoId;
-    }
-
-    public Long getMotoristaId() {
-        return motoristaId;
-    }
-
-    public void setMotoristaId(Long motoristaId) {
-        this.motoristaId = motoristaId;
-    }
-
-    public CargaDTO getCarga() {
-        return carga;
-    }
-
-    public void setCarga(CargaDTO carga) {
-        this.carga = carga;
-    }
 }

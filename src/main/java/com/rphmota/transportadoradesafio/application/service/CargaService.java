@@ -31,7 +31,6 @@ public class CargaService {
         return cargaRepository.findById(id).map(carga -> {
             carga.setTipo(updatedCarga.getTipo());
             carga.setDescricao(updatedCarga.getDescricao());
-            // Se houver necessidade de validar ou modificar outros campos, adicione aqui
             return cargaRepository.save(carga);
         }).orElseThrow(() -> new ResourceNotFoundException("Carga não encontrada com ID: " + id));
     }

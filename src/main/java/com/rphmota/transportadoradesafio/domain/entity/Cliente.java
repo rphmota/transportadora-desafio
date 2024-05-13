@@ -19,8 +19,6 @@ public class Cliente {
     @JsonIgnore
     private List<Caminhao> frota;
 
-    // Getters e setters
-
     public Long getId() {
         return id;
     }

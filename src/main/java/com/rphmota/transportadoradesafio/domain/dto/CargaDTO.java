@@ -1,21 +1,24 @@
 package com.rphmota.transportadoradesafio.domain.dto;
 
+import com.rphmota.transportadoradesafio.domain.entity.Carga;
+
 public class CargaDTO {
     private Long id;
     private String tipo;
     private String descricao;
 
-    // Construtor vazio necessário para frameworks
-    public CargaDTO() {}
 
-    // Construtor com todos os campos
-    public CargaDTO(Long id, String tipo, String descricao) {
-        this.id = id;
-        this.tipo = tipo;
-        this.descricao = descricao;
+
+    public CargaDTO() {
     }
 
-    // Getters e Setters
+    public CargaDTO(Carga carga) {
+        this.id = carga.getId();
+        this.tipo = carga.getTipo();
+        this.descricao = carga.getDescricao();
+    }
+
+    // Getters e setters
     public Long getId() {
         return id;
     }

@@ -28,6 +28,7 @@ public class ValidacaoEntregaService {
         this.motoristaService = motoristaService;
     }
 
+    //utilizo o varios metodos abaixo para aplicar as regras de negocio descritas no desafio
     public void validarEntrega(Entrega entrega) throws Exception {
         validarLimiteEntregasCaminhao(entrega.getCaminhao(), entrega.getDataEntrega());
         validarLimiteEntregasMotorista(entrega.getMotorista(), entrega.getDataEntrega());
@@ -47,7 +48,7 @@ public class ValidacaoEntregaService {
 
 
     private void calcularTaxasRegionais(Entrega entrega) {
-        entrega.calcularValorTotal(); // Isso chama o método na entidade que gerencia todo o cálculo
+        entrega.calcularValorTotal();
     }
 
     private void validarLimiteEntregasCaminhao(Caminhao caminhao, LocalDate dataEntrega) throws Exception {

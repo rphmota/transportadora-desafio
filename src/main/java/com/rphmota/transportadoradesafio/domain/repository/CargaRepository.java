@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface CargaRepository extends JpaRepository<Carga, Long> {
-    // Método para buscar cargas por tipo
+
     List<Carga> findByTipo(String tipo);
 }
 

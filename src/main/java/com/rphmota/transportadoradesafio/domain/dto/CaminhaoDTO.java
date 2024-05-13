@@ -5,9 +5,9 @@ public class CaminhaoDTO {
     private Long id;
     private String placa;
     private int capacidade;
-    private Long clienteId; // Somente ID do cliente para reduzir acoplamento
+    private Long clienteId;
 
-    // Construtores, getters e setters
+
     public Long getId() {
         return id;
     }

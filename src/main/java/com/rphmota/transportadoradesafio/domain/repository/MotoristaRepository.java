@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface MotoristaRepository extends JpaRepository<Motorista, Long> {
-    // Corrigido para referenciar o nome exato da propriedade na entidade Caminhao
+
     List<Motorista> findByCaminhaoId(Long caminhaoId);
 
     boolean existsByCaminhaoId(Long id);

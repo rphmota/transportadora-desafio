@@ -9,7 +9,6 @@ import com.rphmota.transportadoradesafio.domain.entity.Motorista;
 import com.rphmota.transportadoradesafio.domain.repository.CargaRepository;
 import com.rphmota.transportadoradesafio.domain.repository.EntregaRepository;
 import com.rphmota.transportadoradesafio.exception.ResourceNotFoundException;
-import com.rphmota.transportadoradesafio.exception.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +35,7 @@ public class EntregaService {
 
     @Transactional(rollbackFor = Exception.class)
     public Entrega criarEntrega(Entrega novaEntrega) throws Exception {
-        // Validações e associações
+
         Caminhao caminhao = caminhaoService.getCaminhaoById(novaEntrega.getCaminhao().getId());
         Motorista motorista = motoristaService.getMotoristaById(novaEntrega.getMotorista().getId());
         Carga carga = cargaRepository.findById(novaEntrega.getCarga().getId())
@@ -60,7 +59,7 @@ public class EntregaService {
 
     public Entrega getEntregaById(Long id) throws ResourceNotFoundException {
         return entregaRepository.findById(id).map(entrega -> {
-            entrega.calcularValorTotal(); // Assegure-se que o valor total seja recalculado com as regras atualizadas
+            entrega.calcularValorTotal();
             return entrega;
         }).orElseThrow(() -> new ResourceNotFoundException("Entrega não encontrada com ID: " + id));
     }

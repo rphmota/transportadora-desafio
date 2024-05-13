@@ -1,8 +1,6 @@
 package com.rphmota.transportadoradesafio.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -38,12 +36,12 @@ public class Entrega {
 
     @ManyToOne
     @JoinColumn(name = "caminhao_id", nullable = false)
-    @JsonIgnoreProperties({"entregas"}) // Ignora a lista de entregas em Caminhao
+    @JsonIgnoreProperties({"entregas"}) // Ignora a lista de entregas em Caminhao (ainda ajustando dto)
     private Caminhao caminhao;
 
     @ManyToOne
     @JoinColumn(name = "motorista_id", nullable = false)
-    @JsonIgnoreProperties({"entregas"}) // Ignora a lista de entregas em Motorista
+    @JsonIgnoreProperties({"entregas"}) // Ignora a lista de entregas em Motorista  (ainda ajustando dto)
     private Motorista motorista;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -67,8 +65,8 @@ public class Entrega {
                 '}';
     }
 
-    // Métodos de cálculo do valor total
-    public void calcularValorTotal() {
+
+    public Double calcularValorTotal() {
         this.valorTotal = valorBase;
         double taxaAdicional = 0;
         switch (destino.toLowerCase()) {
@@ -86,6 +84,7 @@ public class Entrega {
 
         // Definir como valiosa se o valor total exceder 30000
         this.valiosa = this.valorTotal > 30000;
+        return this.valorTotal;
     }
 
 

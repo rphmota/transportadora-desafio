@@ -16,7 +16,7 @@ public class Carga {
     @Column(nullable = false)
     private String descricao;
 
-    // Getters e setters
+
 
     public String getTipo() {
         return tipo;

@@ -74,11 +74,10 @@ public class CaminhaoService {
 
     public Caminhao associateMotoristaToCaminhao(Long caminhaoId, Long motoristaId) {
         return caminhaoRepository.findById(caminhaoId).map(caminhao -> {
-            // Aqui você deverá ter acesso ao repositório de motoristas também
             Motorista motorista = motoristaRepository.findById(motoristaId)
                     .orElseThrow(() -> new ResourceNotFoundException("Motorista não encontrado com ID: " + motoristaId));
 
-            // Verificar se o caminhão já está associado a outro motorista
+
             if (caminhao.getMotorista() != null && caminhao.getMotorista().getId() != motoristaId) {
                 throw new IllegalStateException("Caminhão já está associado a outro motorista");
             }

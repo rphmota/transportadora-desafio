@@ -2,6 +2,7 @@ package com.rphmota.transportadoradesafio.adapter.input.controller;
 
 import com.rphmota.transportadoradesafio.application.service.MotoristaService;
 import com.rphmota.transportadoradesafio.domain.dto.CriarMotoristaDTO;
+import com.rphmota.transportadoradesafio.domain.dto.MotoristaDTO;
 import com.rphmota.transportadoradesafio.domain.entity.Motorista;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,10 @@ public class MotoristaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Motorista> getMotoristaById(@PathVariable Long id) {
+    public ResponseEntity<MotoristaDTO> getMotoristaById(@PathVariable Long id) {
         Motorista motorista = motoristaService.getMotoristaById(id);
-        return ResponseEntity.ok(motorista);
+        MotoristaDTO motoristaDTO = new MotoristaDTO(motorista);
+        return ResponseEntity.ok(motoristaDTO);
     }
 
     @PostMapping
