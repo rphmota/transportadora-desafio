@@ -29,58 +29,64 @@ O sistema permitirá:
 
 ```mermaid
 classDiagram
-    
-    note for Cliente "Cliente controla sua frota de caminhões."
+    direction LR
+    note for Cliente  "Cliente controla sua frota de caminhões."
     class Cliente {
-        +int clienteId
-        +String nome
-        +List frota
-    }
+            +Long id
+            +String nome
+            +List<Caminhao> frota
+        }
     
-    note for Caminhao "Um caminhão está associado a um motorista e até 4 entregas por mês."
+    note for Caminhao  "Um caminhão está associado a um motorista e até 4 entregas por mês."
     class Caminhao {
-        +int caminhaoId
+        +Long id
         +String placa
         +int capacidade
+        +Cliente cliente
         +Motorista motorista
-        +List entregas
-    }
-    
+        +List<Entrega> entregas
+    }    
+
     note for Motorista "Um motorista só pode fazer duas entregas por mês."
+    note for Motorista "Um motorista só pode fazer uma entregas para o nordeste."
     class Motorista {
-        +int motoristaId
+        +Long id
         +String nome
         +Caminhao caminhao
-        +List entregas
+        +List<Entrega> entregas
     }
     
-    note for Entrega "Detalhes da Entrega: valores > 30mil (Valiosa), eletrônicos (Segurada), combustível (Perigosa)."    
+    note for Entrega  "Detalhes da Entrega: valores > 30mil (Valiosa), eletrônicos (Segurada), combustível (Perigosa)."
     class Entrega {
-        +int entregaId
+        +Long id
         +String destino
         +double valorBase
+        +LocalDate dataEntrega
         +double valorTotal
-        +Carga carga
-        +boolean isValiosa
-        +boolean isPerigosa
-        +boolean isSegurada
+        +Boolean valiosa
+        +Boolean segurada
+        +Boolean perigosa
         +Caminhao caminhao
+        +Motorista motorista
+        +Carga carga
     }
-    
+
     note for Carga "Carga está associada a uma entrega específica."
     class Carga {
-        +int cargaId
+        +Long id
         +String tipo
         +String descricao
         +Entrega entrega
     }
     
+
+    Cliente "1" -- "*" Caminhao : "Possui"
+    Caminhao "1" -- "1" Cliente : "Pertence a"
+    Caminhao "1" -- "0..1" Motorista : "Operado por"
+    Caminhao "1" -- "*" Entrega : "Realiza"
+    Motorista "1" -- "0..2" Entrega : "Realiza"
+    Entrega "1" -- "1" Carga : "Contém"
     
-    Cliente "1" -- "*" Caminhao
-    Caminhao "*" -- "1" Motorista
-    Caminhao "1" -- "0..4" Entrega
-    Motorista "1" -- "0..2" Entrega
-    Entrega "1" -- "1" Carga
 ```
 
 ## Iniciando a aplicação
